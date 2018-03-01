@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.tmpl.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+
+
+<h2>Timesheet</h2>
+<span><input data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button></span>
+
+
+<h3>Jobs:</h3>
+<ul data-bind="template: {name:'jobsTemplate', foreach:jobs}"></ul>
+
+<script id="jobsTemplate" type="text/html">
+    <li>${ $data.name }</li>
+</script>
+
+<script src="~/Scripts/Application/index.js"></script>
