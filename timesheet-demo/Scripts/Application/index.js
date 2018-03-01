@@ -9,12 +9,13 @@ var viewModel = {
     jobs: ko.observableArray([new job("johnny"), new job("anderson")]),
 
     addJob: function () {
-        //this.jobs.push(new job(this.jobToAdd));
         var objectToAdd = new job(this.jobToAdd);
 
-        if (this.jobs()[this.jobs().length - 1].name() !== objectToAdd.name()) {
-            this.jobs.push(new job(this.jobToAdd));
+        for (var i = 0; i < this.jobs().length; i++) {
+            if (objectToAdd.name() === this.jobs()[i].name())
+                return;
         }
+        this.jobs.push(new job(this.jobToAdd));
     }
 }
 ko.applyBindings(viewModel);
