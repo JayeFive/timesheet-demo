@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="15f662cd82d44161826f02677980a332" Name="Diagram1">
+        <EntityTypeShape EntityType="TimesheetDbModel.Job" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimesheetDbModel.Task" Width="1.5" PointX="2.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimesheetDbModel.MasterSheet" Width="1.5" PointX="0.5" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="TimesheetDbModel.FK__MasterShe__JobId__34C8D9D1" />
+        <AssociationConnector Association="TimesheetDbModel.FK__MasterShe__TaskI__35BCFE0A" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

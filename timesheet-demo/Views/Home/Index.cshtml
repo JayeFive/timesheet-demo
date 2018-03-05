@@ -18,4 +18,12 @@
     <li>${ $data.name }</li>
 </script>
 
+<select data-bind="options: jobs,
+                   optionsText: function(job) {
+                       return job.name()
+                   },
+                   optionsCaption: 'Select Job'"></select>
+
+
+
 <script src="~/Scripts/Application/index.js"></script>
