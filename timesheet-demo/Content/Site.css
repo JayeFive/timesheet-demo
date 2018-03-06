@@ -16,3 +16,24 @@ textarea {
     max-width: 280px;
 }
 
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(58px, auto);
+}
+
+.form-container {
+    position: relative;
+    grid-column: 1;
+}
+
+.table-container {
+    position: relative;
+    grid-column: 2 / 4;
+}
+
+.form-element-container {
+    margin: 15px;
+}
+

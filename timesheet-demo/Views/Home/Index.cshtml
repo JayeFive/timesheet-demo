@@ -6,23 +6,39 @@
 <script src="~/Scripts/jquery.tmpl.min.js"></script>
 <script src="~/Scripts/knockout-3.4.2.js"></script>
 
+<div class="main-container">
+    <div class="form-container">
+        <h2>Enter Work:</h2>
+        <div class="form-element-container">
+            <span><select data-bind="options: jobs, optionsText: function(job) { return job.name() },
+                                    optionsCaption: 'Select Job'"></select>
+                  <input data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button>
+            </span>
+        </div>
+        <div>
+            <span><select data-bind="options: tasks, optionsText: function(task) { return task.name() }, 
+                                    optionsCaption: 'Select Task'"></select>
+                  <input data-bind="value: taskToAdd" /><button data-bind="click: addTask">Add Task</button>
+            </span>
+        </div>
+        <div class="form-element-container">
+            <select data-bind="options: hoursOptions(), optionsCaption: 'Select Hours'"></select>
+        </div>
+    </div>
+    <div class="table-container">
+        <h2>Timesheet:</h2>
+    </div>
+</div>
 
-<h2>Timesheet</h2>
-<span><input data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button></span>
 
-
-<h3>Jobs:</h3>
+@*<h3>Jobs:</h3>
 <ul data-bind="template: {name:'jobsTemplate', foreach:jobs}"></ul>
 
 <script id="jobsTemplate" type="text/html">
     <li>${ $data.name }</li>
-</script>
+</script>*@
 
-<select data-bind="options: jobs,
-                   optionsText: function(job) {
-                       return job.name()
-                   },
-                   optionsCaption: 'Select Job'"></select>
+
 
 
 
