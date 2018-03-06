@@ -28,6 +28,10 @@ textarea {
     grid-column: 1;
 }
 
+.text-box {
+    width: 140px;
+}
+
 .table-container {
     position: relative;
     grid-column: 2 / 4;

@@ -10,23 +10,42 @@
     <div class="form-container">
         <h2>Enter Work:</h2>
         <div class="form-element-container">
-            <span><select data-bind="options: jobs, optionsText: function(job) { return job.name() },
-                                    optionsCaption: 'Select Job'"></select>
-                  <input data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button>
-            </span>
-        </div>
-        <div>
-            <span><select data-bind="options: tasks, optionsText: function(task) { return task.name() }, 
-                                    optionsCaption: 'Select Task'"></select>
-                  <input data-bind="value: taskToAdd" /><button data-bind="click: addTask">Add Task</button>
+            <span>
+                <select data-bind="options: jobs, optionsText: function(job) { return job.name() },
+                                   optionsCaption: 'Select Job'"></select>
+                <input class="text-box" data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button>
             </span>
         </div>
         <div class="form-element-container">
-            <select data-bind="options: hoursOptions(), optionsCaption: 'Select Hours'"></select>
+            <span>
+                <select data-bind="options: tasks, optionsText: function(task) { return task.name() }, 
+                                   optionsCaption: 'Select Task'"></select>
+                <input class="text-box" data-bind="value: taskToAdd" /><button data-bind="click: addTask">Add Task</button>
+            </span>
+        </div>
+        <div class="form-element-container">
+            <span>
+                <select data-bind="options: hoursOptions(), optionsCaption: 'Select Hours'"></select>
+                <button data-bind="">Add to Timesheet</button>
+            </span>
         </div>
     </div>
     <div class="table-container">
         <h2>Timesheet:</h2>
+        <table class="table">
+            <tr>
+                <th><strong>Job Name</strong></th>
+                <th><em>Hours</em></th>
+            </tr>
+            <tr>
+                <td>First Task</td>
+                <td>6</td>
+            </tr>
+            <tr>
+                <td>Second Task</td>
+                <td>4</td>
+            </tr>
+        </table>
     </div>
 </div>
 
