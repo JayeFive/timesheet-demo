@@ -26,16 +26,21 @@
         <div class="form-element-container">
             <span>
                 <select data-bind="options: hoursOptions(), optionsCaption: 'Select Hours'"></select>
-                <button data-bind="">Add to Timesheet</button>
             </span>
+        </div>
+        <div class="form-element-container">
+            <button class="submit-button" data-bind="">Add to Timesheet</button>
         </div>
     </div>
     <div class="table-container">
         <h2>Timesheet:</h2>
-        <table class="table">
+        <table class="table" data-bind="foreach: jobs">
             <tr>
-                <th><strong>Job Name</strong></th>
-                <th><em>Hours</em></th>
+                <th>
+                    <span data-bind="text: name"></span>
+                    <a class="badge badge-pill danger" data-bind="click: $root.removeJob">remove</a>
+                </th> 
+                <th>Hours</th>
             </tr>
             <tr>
                 <td>First Task</td>
@@ -46,6 +51,8 @@
                 <td>4</td>
             </tr>
         </table>
+        
+
     </div>
 </div>
 

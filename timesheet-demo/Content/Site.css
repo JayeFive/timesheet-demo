@@ -28,8 +28,16 @@ textarea {
     grid-column: 1;
 }
 
+.form-element-container {
+    margin: 15px;
+}
+
 .text-box {
     width: 140px;
+}
+
+.submit-button {
+    margin: 0 25%;
 }
 
 .table-container {
@@ -37,7 +45,4 @@ textarea {
     grid-column: 2 / 4;
 }
 
-.form-element-container {
-    margin: 15px;
-}
 
