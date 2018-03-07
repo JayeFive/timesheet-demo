@@ -8,6 +8,7 @@
 function task(name) {
     return {
         name: ko.observable(name)
+        //hours: ko.observable(hours)
     }
 }
 
@@ -47,11 +48,14 @@ var viewModel = {
         this.tasks.push(new task(this.taskToAdd));
     },
 
-    removeJob: function (job) { this.jobs.remove(job) },
+    removeJob: function (job) {
+        viewModel.jobs.remove(job);
+    },
 
     enterWork: function () {
 
         return;
     }
 }
+
 ko.applyBindings(viewModel);
