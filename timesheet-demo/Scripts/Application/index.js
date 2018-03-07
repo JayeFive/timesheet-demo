@@ -8,7 +8,7 @@
 function task(name) {
     return {
         name: ko.observable(name),
-        hours: ko.observable(0)
+        hours: 0
     }
 }
 
@@ -55,15 +55,18 @@ var viewModel = {
 }
 
 function submitTask(/*job, task, hours*/) {
-        // determine job object
-
-        // add task to job object tasks array
-
-        // add the selected hours to the task object
-
+    // determine job object
     console.log(job.name());
-    console.log(task.name());
-    console.log(viewModel.hours);
+
+    // add task to job object tasks array
+    job.tasks.push(task);
+    console.log(job.tasks[0]);
+
+    // add the selected hours to the task object
+
+    job.tasks[job.tasks.length - 1].hours += parseInt(viewModel.hours);
+    console.log(job.tasks[job.tasks.length - 1].hours);
+
 }
 
 ko.applyBindings(viewModel);
