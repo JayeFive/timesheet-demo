@@ -12,24 +12,24 @@
         <div class="form-element-container">
             <span>
                 <select data-bind="options: jobs, optionsText: function(job) { return job.name() },
-                                   optionsCaption: 'Select Job'"></select>
+                                   value: job, optionsCaption: 'Select Job'"></select>
                 <input class="text-box" data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button>
             </span>
         </div>
         <div class="form-element-container">
             <span>
                 <select data-bind="options: tasks, optionsText: function(task) { return task.name() }, 
-                                   optionsCaption: 'Select Task'"></select>
+                                   value: task, optionsCaption: 'Select Task'"></select>
                 <input class="text-box" data-bind="value: taskToAdd" /><button data-bind="click: addTask">Add Task</button>
             </span>
         </div>
         <div class="form-element-container">
             <span>
-                <select data-bind="options: hoursOptions(), optionsCaption: 'Select Hours'"></select>
+                <select data-bind="options: hoursOptions(), value: hours, optionsCaption: 'Select Hours'"></select>
             </span>
         </div>
         <div class="form-element-container">
-            <button class="submit-button" data-bind="">Add to Timesheet</button>
+            <button class="submit-button" data-bind="click: submitTask">Add to Timesheet</button>
         </div>
     </div>
     <div class="table-container">
@@ -55,17 +55,5 @@
 
     </div>
 </div>
-
-
-@*<h3>Jobs:</h3>
-<ul data-bind="template: {name:'jobsTemplate', foreach:jobs}"></ul>
-
-<script id="jobsTemplate" type="text/html">
-    <li>${ $data.name }</li>
-</script>*@
-
-
-
-
 
 <script src="~/Scripts/Application/index.js"></script>

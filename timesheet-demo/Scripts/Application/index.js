@@ -7,8 +7,8 @@
 
 function task(name) {
     return {
-        name: ko.observable(name)
-        //hours: ko.observable(hours)
+        name: ko.observable(name),
+        hours: ko.observable(0)
     }
 }
 
@@ -27,11 +27,12 @@ var viewModel = {
     jobs: ko.observableArray([new job("johnny"), new job("anderson")]),
     taskToAdd: "",
     tasks: ko.observableArray([new task("siding"), new task("roofing")]),
+    hours: 0,
 
     addJob: function () {
         var objectToAdd = new job(this.jobToAdd);
 
-        for (var i = 0; i < this.jobs().length; i++) {
+        for (var i = 0; i < this.jobs().length; i++) { 
             if (objectToAdd.name() === this.jobs()[i].name())
                 return;
         }
@@ -51,11 +52,18 @@ var viewModel = {
     removeJob: function (job) {
         viewModel.jobs.remove(job);
     },
+}
 
-    enterWork: function () {
+function submitTask(/*job, task, hours*/) {
+        // determine job object
 
-        return;
-    }
+        // add task to job object tasks array
+
+        // add the selected hours to the task object
+
+    console.log(job.name());
+    console.log(task.name());
+    console.log(viewModel.hours);
 }
 
 ko.applyBindings(viewModel);
