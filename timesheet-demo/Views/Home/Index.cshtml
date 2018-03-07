@@ -25,7 +25,7 @@
         </div>
         <div class="form-element-container">
             <span>
-                <select data-bind="options: hoursOptions(), value: hours, optionsCaption: 'Select Hours'"></select>
+                <select data-bind="options: hoursOptions(), value: taskHours, optionsCaption: 'Select Hours'"></select>
             </span>
         </div>
         <div class="form-element-container">
@@ -42,17 +42,14 @@
                 </th> 
                 <th>Hours</th>
             </tr>
-            <tr>
-                <td>First Task</td>
-                <td>6</td>
-            </tr>
-            <tr>
-                <td>Second Task</td>
-                <td>4</td>
-            </tr>
+            <tbody data-bind="template: { name: 'taskTemplate', foreach: tasks}"></tbody>
         </table>
-        
-
+        <script id="taskTemplate" type="text/html">
+            <tr>
+                <td data-bind="text: name"></td>
+                <td data-bind="text: hours"></td>
+            </tr>
+        </script>
     </div>
 </div>
 

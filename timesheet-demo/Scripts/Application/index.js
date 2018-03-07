@@ -27,7 +27,8 @@ var viewModel = {
     jobs: ko.observableArray([new job("johnny"), new job("anderson")]),
     taskToAdd: "",
     tasks: ko.observableArray([new task("siding"), new task("roofing")]),
-    hours: 0,
+    taskHours: 0,
+    //displayHours: ko.computed()
 
     addJob: function () {
         var objectToAdd = new job(this.jobToAdd);
@@ -64,7 +65,7 @@ function submitTask(/*job, task, hours*/) {
 
     // add the selected hours to the task object
 
-    job.tasks[job.tasks.length - 1].hours += parseInt(viewModel.hours);
+    job.tasks[job.tasks.length - 1].hours += parseFloat(viewModel.taskHours);
     console.log(job.tasks[job.tasks.length - 1].hours);
 
 }
