@@ -9,28 +9,30 @@
 <div class="main-container">
     <div class="form-container">
         <h2>Enter Work:</h2>
-        <div class="form-element-container">
-            <span>
-                <select data-bind="options: jobs, optionsText: function(job) { return job.name() },
-                                   value: job, optionsCaption: 'Select Job'"></select>
-                <input class="text-box" data-bind="value: jobToAdd" /><button data-bind="click: addJob">Add Job</button>
-            </span>
-        </div>
-        <div class="form-element-container">
-            <span>
-                <select data-bind="options: tasks, optionsText: function(task) { return task.name() }, 
-                                   value: task, optionsCaption: 'Select Task'"></select>
-                <input class="text-box" data-bind="value: taskToAdd" /><button data-bind="click: addTask">Add Task</button>
-            </span>
-        </div>
-        <div class="form-element-container">
-            <span>
-                <select data-bind="options: hoursOptions(), value: taskHours, optionsCaption: 'Select Hours'"></select>
-            </span>
-        </div>
-        <div class="form-element-container">
-            <button class="submit-button" data-bind="click: submitTask">Add to Timesheet</button>
-        </div>
+        <form data-bind="submit: submitTask">
+            <div class="form-element-container">
+                <span>
+                    <select data-bind="options: jobs, optionsText: function(job) { return job.name() },
+                                       value: job(name), optionsCaption: 'Select Job'"></select>
+                    <input class="text-box" data-bind="value: jobName" /><button data-bind="click: addJob">Add Job</button>
+                </span>
+            </div>
+            <div class="form-element-container">
+                <span>
+                    <select data-bind="options: taskList, optionsCaption: 'Select Task'"></select>
+                    <input class="text-box" data-bind="value: taskName" /><button data-bind="click: addTask">Add Task</button>
+                </span>
+            </div>
+            <div class="form-element-container">
+                <span>
+                    <select data-bind="options: hoursOptions(), value: taskHours, optionsCaption: 'Select Hours'"></select>
+                </span>
+            </div>
+            <div class="form-element-container">
+                <button class="submit-button" data-bind="click: submitTask">Add to Timesheet</button>
+            </div>
+        </form>
+        <span data-bind="text: errorMessage"></span>
     </div>
     <div class="table-container">
         <h2>Timesheet:</h2>

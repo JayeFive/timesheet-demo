@@ -13,9 +13,12 @@ function task(name) {
 }
 
 function hoursOptions() {
+    const hoursIncrement = 0.5,
+        minHours = 0.5,
+        maxHours = 12;
     var optionsArray = [];
 
-    for (var i = 0.5; i <= 12; i += 0.5) {
+    for (var i = minHours; i <= maxHours; i += hoursIncrement) {
         optionsArray.push(i);
     }
 
@@ -23,51 +26,54 @@ function hoursOptions() {
 }
 
 var viewModel = {
-    jobToAdd: "",
-    jobs: ko.observableArray([new job("johnny"), new job("anderson")]),
-    taskToAdd: "",
-    tasks: ko.observableArray([new task("siding"), new task("roofing")]),
+    jobName: "",
+    jobs: ko.observableArray(),
+    taskName: "",
+    taskList: ko.observableArray(["one", "two"]),
     taskHours: 0,
-    //displayHours: ko.computed()
+    timesheet: ko.observableArray(),
+    errorMessage: ko.observable(),
 
-    addJob: function () {
-        var objectToAdd = new job(this.jobToAdd);
+    addJob: function() {
+        var objectToAdd = new job(this.jobName);
 
         for (var i = 0; i < this.jobs().length; i++) { 
             if (objectToAdd.name() === this.jobs()[i].name())
                 return;
         }
-        this.jobs.push(new job(this.jobToAdd));
+        this.jobs.push(new job(this.jobName));
     },
 
     addTask: function () {
-        var objectToAdd = new task(this.taskToAdd);
-
-        for (var i = 0; i < this.tasks().length; i++) {
-            if (objectToAdd.name() === this.tasks()[i].name())
-                return;
+        for (var i = 0; i < this.taskList().length; i++) {
+            if (this.taskName === this.taskList()[i]) return;
         }
-        this.tasks.push(new task(this.taskToAdd));
+        this.taskList.push(this.taskName);
     },
 
-    removeJob: function (job) {
+    removeJob: function(job) {
         viewModel.jobs.remove(job);
     },
+
+    submitTask: function() {
+
+    }
 }
 
-function submitTask(/*job, task, hours*/) {
-    // determine job object
-    console.log(job.name());
+//function submitTask() {
+//    // determine job object
+    
+//    viewModel.errorMessage("This is the label");
 
-    // add task to job object tasks array
-    job.tasks.push(task);
-    console.log(job.tasks[0]);
+//    // add task to job object tasks array
 
-    // add the selected hours to the task object
+//    console.log(viewModel.taskList()[0]);
 
-    job.tasks[job.tasks.length - 1].hours += parseFloat(viewModel.taskHours);
-    console.log(job.tasks[job.tasks.length - 1].hours);
+//    // add the selected hours to the task object
 
-}
+//    job.tasks[job.tasks.length - 1].hours += parseFloat(viewModel.taskHours);
+//    console.log(job.tasks[job.tasks.length - 1].hours);
+
+//}
 
 ko.applyBindings(viewModel);
