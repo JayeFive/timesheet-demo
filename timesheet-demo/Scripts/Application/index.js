@@ -1,19 +1,12 @@
-﻿//function job(name) {
-//    return {
-//        name: ko.observable(name),
-//        tasks: []
-//    };
-//}
-
+﻿
 var job = function(name) {
     this.jobName = name;
+    this.tasks = ko.observableArray();
 }
 
-function task(name) {
-    return {
-        name: ko.observable(name),
-        hours: 0
-    }
+var task = function (name) {
+    this.taskName = name;
+    this.hours = 0;
 }
 
 function hoursOptions() {
@@ -35,7 +28,7 @@ var viewModel = {
     jobName: "",
     jobs: ko.observableArray(),
     taskName: "",
-    taskList: ko.observableArray(["one", "two"]),
+    taskList: ko.observableArray(),
     taskHours: 0,
     timesheet: ko.observableArray(),
     errorMessage: ko.observable(),
@@ -43,19 +36,30 @@ var viewModel = {
     addJob: function() {
         var objectToAdd = new job(this.jobName);
 
-        for (var i = 0; i < this.jobs().length; i++) { 
-            if (objectToAdd.jobName === this.jobs()[i].jobName)
-                return;
-        }
+        if (objectToAdd.jobName === "") return;
 
+        for (var i = 0; i < this.jobs().length; i++) { 
+            if (objectToAdd.jobName === this.jobs()[i].jobName) {
+                viewModel.labelText = "Job name already exists"; // not working
+                return;
+            }
+        }
         this.jobs.push(objectToAdd);
     },
 
     addTask: function () {
+        var taskToAdd = new task(this.taskName);
+
+        if (taskToAdd.taskName === "") return;
+
         for (var i = 0; i < this.taskList().length; i++) {
-            if (this.taskName === this.taskList()[i]) return;
+            if (taskToAdd.taskName === this.taskList()[i].taskName) {
+
+                return;
+            }
         }
-        this.taskList.push(this.taskName);
+
+        this.taskList.push(taskToAdd);
     },
 
     removeJob: function(job) {
@@ -64,7 +68,7 @@ var viewModel = {
 
     submitTask: function() {
         // determine selected job object
-        console.log(this.selectedJob.name);
+        console.log(this.selectedJob().jobName);
         // add selected task to tasks array within job object
 
         // add selected hours to task object

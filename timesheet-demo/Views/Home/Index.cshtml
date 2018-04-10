@@ -21,7 +21,8 @@
             </div>
             <div class="form-element-container">
                 <span>
-                    <select data-bind="options: taskList, optionsCaption: 'Select Task'"></select>
+                    <select data-bind="options: taskList, optionsText: 'taskName',
+                                       optionsCaption: 'Select Task'"></select>
                     <input class="text-box" data-bind="value: taskName" /><button data-bind="click: addTask">Add Task</button>
                 </span>
             </div>
