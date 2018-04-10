@@ -1,8 +1,12 @@
-﻿function job(name) {
-    return {
-        name: ko.observable(name),
-        tasks: []
-    };
+﻿//function job(name) {
+//    return {
+//        name: ko.observable(name),
+//        tasks: []
+//    };
+//}
+
+var job = function(name) {
+    this.jobName = name;
 }
 
 function task(name) {
@@ -14,8 +18,8 @@ function task(name) {
 
 function hoursOptions() {
     const hoursIncrement = 0.5,
-        minHours = 0.5,
-        maxHours = 12;
+          minHours = 0.5,
+          maxHours = 12;
     var optionsArray = [];
 
     for (var i = minHours; i <= maxHours; i += hoursIncrement) {
@@ -26,6 +30,8 @@ function hoursOptions() {
 }
 
 var viewModel = {
+    labelText: "",
+    selectedJob: ko.observable(),
     jobName: "",
     jobs: ko.observableArray(),
     taskName: "",
@@ -38,10 +44,11 @@ var viewModel = {
         var objectToAdd = new job(this.jobName);
 
         for (var i = 0; i < this.jobs().length; i++) { 
-            if (objectToAdd.name() === this.jobs()[i].name())
+            if (objectToAdd.jobName === this.jobs()[i].jobName)
                 return;
         }
-        this.jobs.push(new job(this.jobName));
+
+        this.jobs.push(objectToAdd);
     },
 
     addTask: function () {
@@ -56,8 +63,13 @@ var viewModel = {
     },
 
     submitTask: function() {
+        // determine selected job object
+        console.log(this.selectedJob.name);
+        // add selected task to tasks array within job object
 
-    }
+        // add selected hours to task object
+    },
+
 }
 
 //function submitTask() {

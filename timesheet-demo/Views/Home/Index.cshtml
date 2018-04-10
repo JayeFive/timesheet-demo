@@ -12,8 +12,10 @@
         <form data-bind="submit: submitTask">
             <div class="form-element-container">
                 <span>
-                    <select data-bind="options: jobs, optionsText: function(job) { return job.name() },
-                                       value: job(name), optionsCaption: 'Select Job'"></select>
+                    @*<select data-bind="options: jobs, optionsText: function(job) { return job.name() },
+                                         value: selectedJob, optionsCaption: 'Select Job'"></select>*@
+                    <select data-bind="options: jobs, optionsText: 'jobName',
+                                       value: selectedJob, optionsCaption: 'Select Job'"></select>
                     <input class="text-box" data-bind="value: jobName" /><button data-bind="click: addJob">Add Job</button>
                 </span>
             </div>
@@ -32,19 +34,19 @@
                 <button class="submit-button" data-bind="click: submitTask">Add to Timesheet</button>
             </div>
         </form>
-        <span data-bind="text: errorMessage"></span>
+        <span data-bind="text: labelText"></span>
     </div>
     <div class="table-container">
         <h2>Timesheet:</h2>
         <table class="table" data-bind="foreach: jobs">
             <tr>
                 <th>
-                    <span data-bind="text: name"></span>
+                    <span data-bind="text: jobName"></span>
                     <a class="badge badge-pill danger" data-bind="click: $root.removeJob">remove</a>
                 </th> 
                 <th>Hours</th>
             </tr>
-            <tbody data-bind="template: { name: 'taskTemplate', foreach: tasks}"></tbody>
+            <tbody data-bind="template: { name: 'taskTemplate', foreach: job.tasks}"></tbody>
         </table>
         <script id="taskTemplate" type="text/html">
             <tr>
