@@ -1,12 +1,11 @@
 ﻿
-var job = function(name) {
-    this.jobName = name;
-    this.tasks = ko.observableArray();
+function Job(jobName) {
+    this.jobName = jobName;
+    this.tasks = [];
 }
 
-var task = function (name) {
-    this.taskName = name;
-    this.hours = 0;
+function Task(taskName) {
+    this.taskName = taskName;
 }
 
 function hoursOptions() {
@@ -22,33 +21,32 @@ function hoursOptions() {
     return optionsArray;
 }
 
-var viewModel = {
-    labelText: "",
-    selectedJob: ko.observable(),
-    jobName: "",
-    jobs: ko.observableArray(),
-    taskName: "",
-    taskList: ko.observableArray(),
-    taskHours: 0,
-    timesheet: ko.observableArray(),
-    errorMessage: ko.observable(),
+function VM() {
+    this.selectedJob = Job;
+    this.selectedTask = Task;
+    this.jobName = "";
+    this.taskName = "";
+    this.jobList = ko.observableArray([new Job("job1")]);
+    this.taskList = ko.observableArray([new Task("task1")]);
+    this.jobs = ko.observableArray();
+    this.taskHours = 0;
 
-    addJob: function() {
-        var objectToAdd = new job(this.jobName);
+    this.addJob = function() {
+        var objectToAdd = new Job(this.jobName);
 
         if (objectToAdd.jobName === "") return;
 
-        for (var i = 0; i < this.jobs().length; i++) { 
+        for (var i = 0; i < this.job().length; i++) {
             if (objectToAdd.jobName === this.jobs()[i].jobName) {
-                viewModel.labelText = "Job name already exists"; // not working
+                //this.labelText() = "Job name already exists"; // not working
                 return;
             }
         }
-        this.jobs.push(objectToAdd);
-    },
+        this.jobList.push(objectToAdd);
+    };
 
-    addTask: function () {
-        var taskToAdd = new task(this.taskName);
+    this.addTask = function() {
+        var taskToAdd = new Task(this.taskName);
 
         if (taskToAdd.taskName === "") return;
 
@@ -58,38 +56,20 @@ var viewModel = {
                 return;
             }
         }
-
         this.taskList.push(taskToAdd);
-    },
+    };
 
-    removeJob: function(job) {
+    this.removeJob = function(job) {
         viewModel.jobs.remove(job);
-    },
+    };
 
-    submitTask: function() {
-        // determine selected job object
-        console.log(this.selectedJob().jobName);
-        // add selected task to tasks array within job object
+    this.submitTask = function () {
+
+        this.selectedJob.tasks.push(this.selectedTask);
+        this.jobs().push(this.selectedJob);
 
         // add selected hours to task object
-    },
-
+    };
 }
 
-//function submitTask() {
-//    // determine job object
-    
-//    viewModel.errorMessage("This is the label");
-
-//    // add task to job object tasks array
-
-//    console.log(viewModel.taskList()[0]);
-
-//    // add the selected hours to the task object
-
-//    job.tasks[job.tasks.length - 1].hours += parseFloat(viewModel.taskHours);
-//    console.log(job.tasks[job.tasks.length - 1].hours);
-
-//}
-
-ko.applyBindings(viewModel);
+ko.applyBindings(new VM);
