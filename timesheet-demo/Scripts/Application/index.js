@@ -64,12 +64,14 @@ function VM() {
     self.addJob = function () {
         if (self.isValidEntry(self.jobName, self.jobList())) {
             self.jobList.push(new Job(self.jobName));
+            self.promptLabel(self.jobName + ' added successfully');
         }
     }
 
     self.addTask = function () {
         if (self.isValidEntry(self.taskName, self.taskList())) {
             self.taskList.push(new Task(self.taskName));
+            self.promptLabel(self.taskName + ' added successfully');
         }
     }
 
