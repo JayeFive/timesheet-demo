@@ -1,11 +1,11 @@
 ﻿
 function Job(jobName) {
-    this.jobName = jobName;
+    this.name = jobName;
     this.tasks = [];
 }
 
 function Task(taskName) {
-    this.taskName = taskName;
+    this.name = taskName;
 }
 
 function hoursOptions() {
@@ -22,54 +22,88 @@ function hoursOptions() {
 }
 
 function VM() {
-    this.selectedJob = Job;
-    this.selectedTask = Task;
-    this.jobName = "";
-    this.taskName = "";
-    this.jobList = ko.observableArray([new Job("job1")]);
-    this.taskList = ko.observableArray([new Task("task1")]);
-    this.jobs = ko.observableArray();
-    this.taskHours = 0;
+    var self = this;
+    self.jobName = "";
+    self.taskName = "";
+    self.selectedJob = Job;
+    self.selectedTask = Task;
+    self.jobList = ko.observableArray([new Job("job1")]);
+    self.taskList = ko.observableArray([new Task("task1")]);
+    self.jobs = ko.observableArray();
+    self.taskHours = 0;
+    self.errorLabel = ko.observable();
 
-    this.addJob = function() {
-        var objectToAdd = new Job(this.jobName);
+    //self.addJob = function () {
+    //    var jobToAdd = new Job(self.jobName);
 
-        if (objectToAdd.jobName === "") return;
+    //    if (jobToAdd.jobName === "") return;
 
-        for (var i = 0; i < this.job().length; i++) {
-            if (objectToAdd.jobName === this.jobs()[i].jobName) {
-                //this.labelText() = "Job name already exists"; // not working
-                return;
-            }
+    //    for (var i = 0; i < self.jobList().length; i++) {
+    //        if (jobToAdd.jobName === this.jobList()[i].jobName) {
+    //            self.errorLabel = "Job name already exists";
+    //            return;
+    //        }
+    //    }
+    //    this.jobList.push(jobToAdd);
+    //};
+
+    //self.addTask = function () {
+    //    var taskToAdd = new Task(this.taskName);
+
+    //    if (taskToAdd.taskName === "") return;
+
+    //    for (var i = 0; i < this.taskList().length; i++) {
+    //        if (taskToAdd.taskName === this.taskList()[i].taskName) {
+
+    //            return;
+    //        }
+    //    }
+    //    this.taskList.push(taskToAdd);
+    //};
+
+    self.addJob = function () {
+        if (self.isValidEntry(self.jobName, self.jobList())) {
+            self.jobList.push(new Job(self.jobName));
         }
-        this.jobList.push(objectToAdd);
-    };
+    }
 
-    this.addTask = function() {
-        var taskToAdd = new Task(this.taskName);
-
-        if (taskToAdd.taskName === "") return;
-
-        for (var i = 0; i < this.taskList().length; i++) {
-            if (taskToAdd.taskName === this.taskList()[i].taskName) {
-
-                return;
-            }
+    self.addTask = function () {
+        if (self.isValidEntry(self.taskName, self.taskList())) {
+            self.taskList.push(new Task(self.taskName));
         }
-        this.taskList.push(taskToAdd);
-    };
+    }
+
+    self.isValidEntry = function (item, list) {
+        if (item.name === "") return false;
+
+        for (var i = 0; i < list.length; i++) {
+            if (item.name === list[i].name) return false;
+        }
+        return true;
+    }
+
 
     this.removeJob = function(job) {
         viewModel.jobs.remove(job);
     };
 
-    this.submitTask = function () {
+    self.submitTask = function () {
 
-        this.selectedJob.tasks.push(this.selectedTask);
-        this.jobs().push(this.selectedJob);
+        var jobToUpdate = self.selectedJob;
 
+        for (var i = 0; i < self.jobs.length; i++) {
+            if (self.selectedJob === self.jobs[i]) {
+                jobToUpdate = self.jobs[i];
+                continue;
+            }
+        }
+
+        jobToUpdate.tasks.push(self.selectedTask);
+        self.jobs.push(self.selectedJob);
+        
         // add selected hours to task object
     };
 }
 
-ko.applyBindings(new VM);
+
+ko.applyBindings(new VM());
