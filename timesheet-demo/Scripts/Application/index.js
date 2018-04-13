@@ -31,7 +31,7 @@ function VM() {
     self.taskList = ko.observableArray([new Task("task1")]);
     self.jobs = ko.observableArray();
     self.taskHours = 0;
-    self.errorLabel = ko.observable();
+    self.promptLabel = ko.observable();
 
     //self.addJob = function () {
     //    var jobToAdd = new Job(self.jobName);
@@ -73,18 +73,23 @@ function VM() {
         }
     }
 
-    self.isValidEntry = function (item, list) {
-        if (item.name === "") return false;
+    self.isValidEntry = function (itemName, list) {
+        if (itemName === "") {
+            self.promptLabel('*Cannot have a blank entry');
+            return false;
+        }
 
         for (var i = 0; i < list.length; i++) {
-            if (item.name === list[i].name) return false;
+            if (itemName === list[i].name) {
+                self.promptLabel('*Entry already exists');
+                return false;
+            }
         }
         return true;
     }
 
-
     this.removeJob = function(job) {
-        viewModel.jobs.remove(job);
+        self.jobs.remove(job);
     };
 
     self.submitTask = function () {
