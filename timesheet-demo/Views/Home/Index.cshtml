@@ -43,14 +43,14 @@
             <tbody data-bind="foreach: jobs">
                 <tr>
                     <th>
-                        <span data-bind="text: jobName"></span>
+                        <span data-bind="text: name"></span>
                         <a class="badge badge-pill danger" data-bind="click: $root.removeJob">remove</a>
                     </th>
                     <th>Hours</th>
                 </tr>
                 <tr data-bind="foreach: tasks">
                     <td>
-                        <span data-bind="text: taskName"></span>
+                        <span data-bind="text: name"></span>
                     </td>
                 </tr>
             </tbody>

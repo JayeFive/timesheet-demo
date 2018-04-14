@@ -1,7 +1,7 @@
 ﻿
 function Job(jobName) {
     this.name = jobName;
-    this.tasks = [];
+    this.tasks = ko.observableArray();
 }
 
 function Task(taskName) {
@@ -32,34 +32,6 @@ function VM() {
     self.jobs = ko.observableArray();
     self.taskHours = 0;
     self.promptLabel = ko.observable();
-
-    //self.addJob = function () {
-    //    var jobToAdd = new Job(self.jobName);
-
-    //    if (jobToAdd.jobName === "") return;
-
-    //    for (var i = 0; i < self.jobList().length; i++) {
-    //        if (jobToAdd.jobName === this.jobList()[i].jobName) {
-    //            self.errorLabel = "Job name already exists";
-    //            return;
-    //        }
-    //    }
-    //    this.jobList.push(jobToAdd);
-    //};
-
-    //self.addTask = function () {
-    //    var taskToAdd = new Task(this.taskName);
-
-    //    if (taskToAdd.taskName === "") return;
-
-    //    for (var i = 0; i < this.taskList().length; i++) {
-    //        if (taskToAdd.taskName === this.taskList()[i].taskName) {
-
-    //            return;
-    //        }
-    //    }
-    //    this.taskList.push(taskToAdd);
-    //};
 
     self.addJob = function () {
         if (self.isValidEntry(self.jobName, self.jobList())) {
@@ -96,17 +68,15 @@ function VM() {
 
     self.submitTask = function () {
 
-        var jobToUpdate = self.selectedJob;
-
-        for (var i = 0; i < self.jobs.length; i++) {
-            if (self.selectedJob === self.jobs[i]) {
-                jobToUpdate = self.jobs[i];
-                continue;
+        for (var i = 0; i < self.jobs().length; i++) {
+            if (self.selectedJob.name === self.jobs()[i].name) {
+                self.jobs()[i].tasks.push(self.selectedTask);
+                return;
             }
         }
 
-        jobToUpdate.tasks.push(self.selectedTask);
         self.jobs.push(self.selectedJob);
+        self.jobs()[self.jobs().length - 1].tasks.push(self.selectedTask);
         
         // add selected hours to task object
     };
