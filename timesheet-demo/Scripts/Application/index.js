@@ -9,9 +9,7 @@ function Task(taskName) {
 }
 
 function hoursOptions() {
-    const hoursIncrement = 0.5,
-          minHours = 0.5,
-          maxHours = 12;
+    const hoursIncrement = 0.5, minHours = 0.5, maxHours = 12;
     var optionsArray = [];
 
     for (var i = minHours; i <= maxHours; i += hoursIncrement) {

@@ -48,11 +48,14 @@
                     </th>
                     <th>Hours</th>
                 </tr>
-                <tr data-bind="foreach: tasks">
-                    <td>
-                        <span data-bind="text: name"></span>
-                    </td>
-                </tr>
+                <!-- ko foreach: tasks -->
+                    <tr >
+                        <td>
+                            <span data-bind="text: name"></span>
+                        </td>
+                    </tr>
+                <!-- /ko -->
+                </span> 
             </tbody>
         </table>
 
