@@ -9,7 +9,7 @@
 <div class="main-container">
     <div class="form-container">
         <h2>Enter Work:</h2>
-        <form data-bind="submit: submitTask">
+        <form data-bind="submit: submitEntry">
             <div class="form-element-container">
                 <span>
                     <select data-bind="options: jobList, optionsText: 'name',
@@ -28,11 +28,11 @@
             </div>
             <div class="form-element-container">
                 <span>
-                    <select data-bind="options: hoursOptions(), value: taskHours, optionsCaption: 'Select Hours'"></select>
+                    <select data-bind="options: hoursOptions(), value: selectedHours, optionsCaption: 'Select Hours'"></select>
                 </span>
             </div>
             <div class="form-element-container">
-                <button class="submit-button" data-bind="click: submitTask">Add to Timesheet</button>
+                <button class="submit-button" data-bind="click: submitEntry">Add to Timesheet</button>
             </div>
         </form>
         <span data-bind="text: promptLabel"></span>
@@ -49,11 +49,11 @@
                     <th>Hours</th>
                 </tr>
                 <!-- ko foreach: tasks -->
-                    <tr >
-                        <td>
-                            <span data-bind="text: name"></span>
-                        </td>
-                    </tr>
+                <tr >
+                    <td>
+                        <span data-bind="text: name"></span>
+                    </td>
+                </tr>
                 <!-- /ko -->
                 </span> 
             </tbody>
